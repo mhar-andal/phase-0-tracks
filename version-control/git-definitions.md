@@ -20,3 +20,5 @@
 * What is a merge conflict?
 
     A merge conflict is an error you get when merging branches. They can occur when commits in your current branch are not in the other commits, and vice versa.
+    
+    Hi Glenna!
