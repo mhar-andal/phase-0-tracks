@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<title>Survey</title>
+</head>
+
+<body>
+	<form name="survey" action="success.html" method="post">
+		<fieldset>
+			<input type="text" name="full-name" placeholder="Full name">
+			<select name="gender">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="n/a">Prefer not to say</option>
+			</select>
+		</fieldset>
+
+		<div>
+			<label>Pick your favorite color!</labal>
+			<input type="color"></input>
+		</div>
+
+		<div>
+			<label>Email: </label>
+			<input type="email" name="email">
+		</div>
+
+		<div>
+			<label>Choose the current date:</label>
+			<input type="date" name="data">
+		</div>
+
+		<div>
+			<label>Are you okay with us using your full name?</label>
+			<input type="checkbox" name="fn-agree" value="yes">
+		</div>
+		<button type="Submit">Submit</button>
+	</form>
+</body>
+
+<style>
+</style>
+</html>
