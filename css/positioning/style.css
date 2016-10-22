@@ -15,3 +15,12 @@
 	left: 250px;
 }
 
+.glasses {
+	margin: auto;
+	display: block;
+	position: absolute;
+	top: 275px;
+	left: 290px;
+
+}
+
