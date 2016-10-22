@@ -1,0 +1,26 @@
+.hat {
+	margin: auto;
+	display: block;
+	position: absolute;
+	top: 100px;
+	left: 230px;
+}
+
+
+.octo {
+	margin: auto;
+	display: block;
+	position: absolute;
+	top: 175px;
+	left: 250px;
+}
+
+.glasses {
+	margin: auto;
+	display: block;
+	position: absolute;
+	top: 275px;
+	left: 290px;
+
+}
+
