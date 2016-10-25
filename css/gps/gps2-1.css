@@ -1,0 +1,26 @@
+.column-1 {
+  background-color: gray;
+  display: inline-block;
+  width:45%;
+  padding:10px;
+  margin:auto;
+  vertical-align:top;
+  }
+
+.column-2 {
+  background-color: brown;
+  display: inline-block;
+  width:45%;
+  padding:10px;
+  margin:auto;
+  vertical-align:top;
+}
+
+body {
+  font-family: "MonoSpace";
+  background-image: url("https://assets-cdn.github.com/images/modules/open_graph/github-mark.png");
+}
+
+p {
+  color:pink;
+}
