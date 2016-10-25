@@ -1,0 +1,25 @@
+- For each person that enters the elevator
+	- Until you feel an button pressed
+		- Detect which button is pressed
+		- Navigate to that floor
+	- If closed door button was pressed, close the door
+	- If opened door button was pressed, open the door.
+	- If emergency button was pressed, call 911
+	- If no response was heard
+		- Stay still.
+
+---------------------------------------------------------------------------------------------------
+- For when you are hungry
+	- Navigate yourself over to the refrigirator
+		- If you see food you would like to eat, prepare it.
+			- Once prepared, you can eat it
+			- If you are unable to prepare, choose another food
+		- If you don't see food you would like to eat
+			- Open your yelp app
+				- Search restaraunts near you
+					- If you located a restaraunt, order food
+					- If you don't have enough money, search a cheaper option.
+				- If you are unable to choose a restaraunt.
+					- Starve
+- For when you are not hungry
+	- CODE!!!!!!!
