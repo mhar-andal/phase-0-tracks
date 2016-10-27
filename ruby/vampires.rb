@@ -2,6 +2,7 @@
 current_year = 2016
 
 
+
 def age_validator(age, year, current_year)
 	real_age = (current_year - year.to_i)
 	if real_age == age.to_i
@@ -12,6 +13,8 @@ def age_validator(age, year, current_year)
 		return false
 	end
 end
+
+
 		
 #~~~~MAIN PROGRAM~~~~
 
