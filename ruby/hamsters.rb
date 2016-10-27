@@ -13,3 +13,9 @@ adopt = gets.chomp
 
 puts "Age: "
 age = gets.chomp.to_i
+
+#Sets age to nil if blank
+if age == 0
+	age = nil
+end
+
