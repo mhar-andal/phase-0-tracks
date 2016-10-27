@@ -36,10 +36,13 @@ response = gets.chomp
 puts "Would you like to enroll in the company's health insurance?(yes or no)"
 enroll = gets.chomp
 
-#Check age
+#CHECK AGE
 age_valid = age_validator(age, year, current_year)
 
+#V
 
+#VAMPIRE DETECTION LOGIC
 
-
+if age_valid == true
+	if 
 
