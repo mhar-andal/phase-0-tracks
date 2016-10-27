@@ -25,4 +25,3 @@ puts "Volume Level: #{volume}"
 puts "Fur Color: #{color}"
 puts "Adopt: #{adopt}"
 puts "Estimated Age: #{age}"
-
