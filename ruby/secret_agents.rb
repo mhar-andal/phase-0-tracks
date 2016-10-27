@@ -53,6 +53,8 @@ end
 # MAIN - driver code
 
 quit = false
+
+
 while quit != true
   puts "What would you like to do?"
   puts "1. Encrypt a password (must do before option 2)"
@@ -60,17 +62,23 @@ while quit != true
   puts "3. Exit the program"
   choice = gets.chomp.to_i
 
+
+
   case choice
   when 1
-  puts "Enter password:"
-  password = gets.chomp.downcase
-  password = encrypt(password)
+	puts "-Enter password:"
+	password = gets.chomp.downcase
+	password = encrypt(password)
   when 2
-  decrypt(password)
+	if password.nil? == true
+	  puts "-Please run option 1 first!"
+	else
+	  decrypt(password)
+ 	end
   when 3
-  quit = true
+  	quit = true
   else
-  puts "Please enter valid option!"
+  puts "-Please enter valid option!"
   end
 end
 
