@@ -8,7 +8,8 @@ def age_validator(age, year, current_year)
 	if real_age == age.to_i
 		puts "Age is correct"
 		return true
-	else		puts "Age is false"
+	else		
+		puts "Age is false"
 		return false
 	end
 end
@@ -35,10 +36,10 @@ while main != true
 	quit = false
 	while quit != true
 		response = gets.chomp
-		if response == "yes"
+		if response.downcase == "yes"
 			garlic_bread_pref = true
 			quit = true
-		elsif response == "no"
+		elsif response.downcase == "no"
 			garlic_bread_pref = false
 			quit = true
 		else
@@ -51,10 +52,10 @@ while main != true
 	quit = false
 	while quit!= true
 		enroll = gets.chomp
-		if enroll == "yes"
+		if enroll.downcase == "yes"
 			health_insur_pref = true
 			quit = true
-		elsif enroll == "no"
+		elsif enroll.downcase == "no"
 			health_insur_pref = false
 			quit = true
 		else
@@ -68,14 +69,14 @@ while main != true
 	#VAMPIRE DETECTION LOGIC
 
 	if age_valid == true
-		if (garlic_bread_pref || health_insur_pref) == true
+		if garlic_bread_pref == true || health_insur_pref == true #GARLIC OR HEALTH IF AGE IS TRUE
 			result = "Probably not a vampire"
 		end
-	elsif age_valid == false
-		if (garlic_bread_pref || health_insur_pref) == false
-			result = "Probably a vampire"
-		elsif (garlic_bread_pref && health_insur_pref) == false
+	elsif age_valid == false 
+		if garlic_bread_pref == false && health_insur_pref == false #GARLIC AND HEALTH IF AGE IS FALSE
 			result = "Almost certainly a vampire"
+		elsif garlic_bread_pref == false || health_insur_pref == false #GARLIC OR HEALTH IF AGE IS FALSE
+			result = "Probably a vampire"
 		end
 	end
 
