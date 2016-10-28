@@ -8,8 +8,7 @@ def age_validator(age, year, current_year)
 	if real_age == age.to_i
 		puts "Age is correct"
 		return true
-	else
-		puts "Age is false"
+	else		puts "Age is false"
 		return false
 	end
 end
@@ -31,18 +30,38 @@ puts "What year were you born?"
 year = gets.chomp
 
 puts "Our company cafeteria serves garlic bread. Should we order some for you?(yes or no)"
-response = gets.chomp
+#WHILE LOOP TO CHECK FOR VALID ANSWER
+quit = false
+while quit != true
+	response = gets.chomp
+	if response == "yes"
+		garlic_bread_pref = true
+		quit = true
+	elsif response == "no"
+		garlic_bread_pref = false
+		quit = true
+	else
+		puts "Please enter valid input(yes or no)"
+	end
+end
 
 puts "Would you like to enroll in the company's health insurance?(yes or no)"
-enroll = gets.chomp
+#WHILE LOOP TO CHECK FOR VALID ANSWER
+quit = false
+while quit!= true
+	enroll = gets.chomp
+	if enroll == "yes"
+		health_insur_pref = true
+		quit = true
+	elsif enroll == "no"
+		health_insur_pref = false
+		quit = true
+	else
+		puts "Please enter valid input(yes or no)"
+	end
+end
 
 #CHECK AGE
 age_valid = age_validator(age, year, current_year)
 
-#V
-
 #VAMPIRE DETECTION LOGIC
-
-if age_valid == true
-	if 
-
