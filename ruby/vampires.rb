@@ -6,10 +6,8 @@ employee_num = 1
 def age_validator(age, year, current_year)
 real_age = (current_year - year.to_i)
 if real_age == age.to_i
-puts "Age is correct"
 return true
 else
-  puts "Age is false"
 return false
 end
 end
@@ -72,6 +70,17 @@ end
 # IF STATEMENT TO CHECK IF DRAKE CULA OR TU FANG IS THE NAME, ALSO DOWNCASES TO MAKE SURE EMPLOYEE ISNT TRICKING THE SYSTEM;)
 if name.downcase == "drake cula" || name.downcase == "tu fang"
 result = "Definetly a vampire"
+end
+#CHECK FOR ALLERGIES
+quit = false
+puts "Please list any allergies, type 'done' to end"
+while quit != true
+allergies = gets.chomp
+if allergies.downcase == "sunshine"
+result = "Probably a vampire"
+elsif allergies.downcase == "done"
+quit = true
+end
 end
 puts result
 index += 1
