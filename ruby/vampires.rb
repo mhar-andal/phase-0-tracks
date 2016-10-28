@@ -2,7 +2,6 @@
 current_year = 2016
 index = 0
 employee_num = 1
-
 #AGE VALIDATOR METHOD
 def age_validator(age, year, current_year)
 real_age = (current_year - year.to_i)
@@ -14,9 +13,7 @@ else
 return false
 end
 end
-
 #~~~~MAIN PROGRAM~~~~
-
  #-USER INPUT
 puts "How many employees do you want to test for?"
 employee_num = gets.chomp.to_i
@@ -43,7 +40,6 @@ else
   puts "Please enter valid input(yes or no)"
 end
 end
-
 puts "Would you like to enroll in the company's health insurance?(yes or no)"#
 #WHILE LOOP TO CHECK FOR VALID ANSWER
 quit = false
@@ -59,12 +55,9 @@ else
   puts "Please enter valid input(yes or no)"
 end
 end
-
 # CHECK AGE
 age_valid = age_validator(age, year, current_year)
-
 # VAMPIRE DETECTION LOGIC
-
 if age_valid == true
 if garlic_bread_pref == true || health_insur_pref == true# GARLIC OR HEALTH IF AGE IS TRUE
 result = "Probably not a vampire"
@@ -76,12 +69,10 @@ elsif garlic_bread_pref == false || health_insur_pref == false# GARLIC OR HEALTH
 result = "Probably a vampire"
 end
 end
-
 # IF STATEMENT TO CHECK IF DRAKE CULA OR TU FANG IS THE NAME, ALSO DOWNCASES TO MAKE SURE EMPLOYEE ISNT TRICKING THE SYSTEM;)
 if name.downcase == "drake cula" || name.downcase == "tu fang"
 result = "Definetly a vampire"
 end
-
 puts result
 index += 1
 end
