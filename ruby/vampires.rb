@@ -15,7 +15,6 @@ end
  #-USER INPUT
 puts "How many employees do you want to test for?"
 employee_num = gets.chomp.to_i
-
 while index < employee_num
 puts "What is your name?"
 name = gets.chomp
