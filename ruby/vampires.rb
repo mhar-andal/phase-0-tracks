@@ -1,5 +1,7 @@
 #FIXED Varibles
 current_year = 2016
+index = 0
+employee_num = 1
 
 #AGE VALIDATOR METHOD
 def age_validator(age, year, current_year)
@@ -15,20 +17,19 @@ end
 
 #~~~~MAIN PROGRAM~~~~
 
-  #-USER INPUT
-main = false
-while main != true
+ #-USER INPUT
+puts "How many employees do you want to test for?"
+employee_num = gets.chomp.to_i
+
+while index < employee_num
 puts "What is your name?"
 name = gets.chomp
-
 puts "How old are you?"
 age = gets.chomp
-
 puts "What year were you born?"
 year = gets.chomp
-
 puts "Our company cafeteria serves garlic bread. Should we order some for you?(yes or no)"#
-WHILE LOOP TO CHECK FOR VALID ANSWER
+#WHILE LOOP TO CHECK FOR VALID ANSWER
 quit = false
 while quit != true
 response = gets.chomp
@@ -44,7 +45,7 @@ end
 end
 
 puts "Would you like to enroll in the company's health insurance?(yes or no)"#
-WHILE LOOP TO CHECK FOR VALID ANSWER
+#WHILE LOOP TO CHECK FOR VALID ANSWER
 quit = false
 while quit != true
 enroll = gets.chomp
@@ -82,11 +83,5 @@ result = "Definetly a vampire"
 end
 
 puts result
-
-puts "Run again?"
-choice = gets.chomp
-if choice == "n"
-main = true
-end
-
+index += 1
 end
