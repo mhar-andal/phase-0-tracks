@@ -12,3 +12,49 @@ PSUEDOCODE
 =end
 
 
+def nextvowel()
+
+end
+
+def nextconson()
+
+end
+
+def switchNames(fullname)
+	index = 0
+	fname = []
+	lname = []
+	while index < fullname.length
+		if fullname[index] == " "
+			exitIndex = index
+			index = 100 #QUIT LOOP IF SPACE FOUND
+		else
+			fname[index] = fullname[index]
+		end
+		index += 1
+	end
+
+	exitIndex += 1 #START NEXT POSITION FOR LAST NAME
+	index = 0
+	while exitIndex < fullname.length
+		lname[index] = fullname[exitIndex]
+		exitIndex += 1
+		index += 1
+	end
+
+	puts fname.join('')
+	puts lname.join('')
+end
+
+puts "Welcome to the Alias Name Generator!"
+
+quit = false
+while quit != true
+	puts "Enter First and Last name!('quit' to exit: "
+	fullname = gets.chomp
+	if fullname.downcase == "quit"
+		quit = true
+	else
+		switchNames(fullname)
+	end
+end
