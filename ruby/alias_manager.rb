@@ -20,11 +20,12 @@ def nextconson()
 
 end
 
-def switchNames(fullname)
+#SWAPPING NAME ALGORITHM WITH ITERATIONS
+def generateAlias(fullname)
 	index = 0
 	fname = []
 	lname = []
-	while index < fullname.length
+	while index < fullname.length #WHILE LOOP ASSIGNS FIRST NAME
 		if fullname[index] == " "
 			exitIndex = index
 			index = 100 #QUIT LOOP IF SPACE FOUND
@@ -42,8 +43,7 @@ def switchNames(fullname)
 		index += 1
 	end
 
-	puts fname.join('')
-	puts lname.join('')
+
 end
 
 puts "Welcome to the Alias Name Generator!"
@@ -55,6 +55,6 @@ while quit != true
 	if fullname.downcase == "quit"
 		quit = true
 	else
-		switchNames(fullname)
+		generateAlias(fullname)
 	end
 end
