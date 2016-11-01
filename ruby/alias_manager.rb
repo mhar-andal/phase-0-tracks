@@ -12,12 +12,26 @@ PSUEDOCODE
 =end
 
 
-def nextvowel()
+def nextvowel(char) #RETURN VOWEL IF VOWEL FOUND
+	vowel = ['a', 'e', 'i', 'o', 'u']
+	index = 0
+	while index < vowel.length
+		if char == vowel[index]
+			if char == "u"
+				return "a"
+			else
+				return vowel[(index + 1)]
+			end
+		end
+	end
 
 end
 
-def nextconson()
-
+def nextconson(char) #RETURN CONSON IF CONSON FOUND
+	conson = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
+	index = 0
+		if char == conson[index]
+		end
 end
 
 #SWAPPING NAME ALGORITHM WITH ITERATIONS
@@ -37,16 +51,28 @@ def generateAlias(fullname)
 
 	exitIndex += 1 #START NEXT POSITION FOR LAST NAME
 	index = 0
-	while exitIndex < fullname.length
+	while exitIndex < fullname.length #WHILE LOOP ASSIGNS LAST NAME
 		lname[index] = fullname[exitIndex]
 		exitIndex += 1
 		index += 1
 	end
 
+	index = 0
+	while index < fname.length
+		fname[index] = nextVowel(fname[index])
+		index +=1
+	end
+
+
 
 end
 
+user_db = {
+	"alias_name" => []
+}
+
 puts "Welcome to the Alias Name Generator!"
+
 
 quit = false
 while quit != true
@@ -55,6 +81,6 @@ while quit != true
 	if fullname.downcase == "quit"
 		quit = true
 	else
-		generateAlias(fullname)
+		user_db["alias_name"].push(generateAlias(fullname))
 	end
 end
