@@ -11,19 +11,34 @@ PSUEDOCODE
 	
 =end
 
-
 def nextvowel(char) #RETURN VOWEL IF VOWEL FOUND
 	vowel = ['a', 'e', 'i', 'o', 'u']
 	index = 0
-	while index < vowel.length
+	while index < vowel.length   
 		if char == vowel[index]
 			if char == "u"
-				return "a"
+				char = "a"
 			else
-				return vowel[(index + 1)]
+				char = vowel[(index + 1)]
+				index = 10
 			end
 		end
+		 
+		if char.downcase == vowel[index]
+			if char == "U"
+				char = "A"
+			else
+				upcaseChar = vowel[(index + 1)]
+				char = upcaseChar.upcase
+				index = 10
+			end
+		end
+
+
+		index += 1
 	end
+
+	return char
 
 end
 
@@ -58,12 +73,21 @@ def generateAlias(fullname)
 	end
 
 	index = 0
+
 	while index < fname.length
-		fname[index] = nextVowel(fname[index])
+		fname[index] = nextvowel(fname[index])
 		index +=1
+		p fname
 	end
 
+	index = 0
+	while index < lname.length
+		lname[index] = nextvowel(lname[index])
+		index += 1
+		p lname
+	end
 
+	return (fname.join('') + " " + lname.join(''))
 
 end
 
@@ -76,11 +100,12 @@ puts "Welcome to the Alias Name Generator!"
 
 quit = false
 while quit != true
-	puts "Enter First and Last name!('quit' to exit: "
+	puts "Enter First and Last name!('quit' to exit): "
 	fullname = gets.chomp
 	if fullname.downcase == "quit"
 		quit = true
 	else
 		user_db["alias_name"].push(generateAlias(fullname))
+		p user_db
 	end
 end
