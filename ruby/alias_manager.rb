@@ -45,8 +45,26 @@ end
 def nextconson(char) #RETURN CONSON IF CONSON FOUND
 	conson = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z']
 	index = 0
+	while index < conson.length
 		if char == conson[index]
+			if char == 'z'
+				char = 'b'
+			else
+				char = conson[(index + 1)]
+				index = 50
+			end
 		end
+
+		if char.downcase == conson[index]
+			if char == "Z"
+				char = "B"
+			else
+				upcaseChar = conson[index + 1]
+				char = upcaseChar.upcase
+				index = 50
+			end
+		end
+	end
 end
 
 #SWAPPING NAME ALGORITHM WITH ITERATIONS
@@ -85,6 +103,16 @@ def generateAlias(fullname)
 		lname[index] = nextvowel(lname[index])
 		index += 1
 		p lname
+	end
+
+	while index < fname.length
+		fname[index] = nextconson(fname[index])
+		index +=1 
+	end
+
+	while index < lname.length
+		lname[index] = nextconson(lname[index])
+		index +=1 
 	end
 
 	return (fname.join('') + " " + lname.join(''))
