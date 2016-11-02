@@ -22,12 +22,20 @@ def filterIfArray(data)
 end
 
 def filterIfHash(data)
-	puts "Printing each user that has less than or equal too 1000"
-	newarray = data.each do |key, array|
-		if array <= 1000
-			puts key
-		end
-	end
+   puts "Printing each user that has less than or equal to 1000"
+   finalArray = []
+   index = 0
+   newarray = data.map do |key, array|
+       
+       if array <= 1000
+           if array != nil
+               finalArray[index] = "#{key}"
+               index += 1
+           end
+       end
+    end
+    
+    p finalArray
 end
 
 def difFilterIfArray(data)

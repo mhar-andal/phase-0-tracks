@@ -1,67 +1,56 @@
-def delete(data)
-	index = 0   
-	while index < data.length
-		if data.values_at(data.keys[index])[index] == 1000  # FIX!
-			data.delete(data.keys[index])
+def deleteArray(data)
+	data.each {|color| 
+		if color == "Red"
+			puts "Deleting Red"
+			data.delete(color)
 		end
-		index += 1
-	end
-
-	p data
+	}
 end
 
-def deletear(data)
-	index = 0
-	datalength = data.length
-	while index < datalength
-		p data[index]
-		if data[index].include?('a') == true
-			data.delete(data[index])
-			index -= 1
-			datalength = data.length
+def deleteHash(data)
+	puts "Deleting everyone who has less than or equal too 100"
+	data.each {|key, array|
+		if array <= 100
+			data.delete(key)
 		end
-		index += 1
-	end
-	p data
+	}
 end
 
-def printArrayIf(data)
-	data.each do |word| 
-		if word.downcase.include?('b') || word.downcase.include?('n')
-			puts word
-		end
-	end
+def filterIfArray(data)
+	puts "Deleting the color blue"
+	data.delete_if {|color| color == 'Blue'}
 end
 
-def printHashIf(data)
-	data.each do |key, array|
-		if array >= 100000
-			puts "#{key} is rich"
-		end
-	end
+def filterIfHash(data)
+   puts "Printing each user that has less than or equal to 1000"
+   finalArray = []
+   index = 0
+   newarray = data.map do |key, array|
+       
+       if array <= 1000
+           if array != nil
+               finalArray[index] = "#{key}"
+               index += 1
+           end
+       end
+    end
+    
+    p finalArray
 end
 
-def printIfNameFound(data)
-	index = 0 
-	while index < data.length
-		if data.keys[index] == "Ashley"
-			puts "We found Ashley!"
-		end
-		index += 1
-	end
+def difFilterIfArray(data)
+	puts "Printing each color that has more than 5 letters"
+	newarray = data.select{|color| color.length > 5 }
+	return newarray
 end
 
-def printIfColorFound(data)
-	index = 0
-	while index < data.length
-		if data[index] == "Blue"
-			puts "We found Blue!"
-		end
-		index += 1
-	end
+def difFilterIfHash(data)
+	puts "Deleteing everyone who has less than 1500000"
+	data.delete_if {|key, array| array < 1500000 }
 end
-
+ 
 def deleteUntilArray(data)
+	puts "Not printing until equal to black"
 	quit = false
 	index = 0
 	while quit != true
@@ -79,84 +68,78 @@ def deleteUntilArray(data)
 end
 
 def deleteUntilHash(data)
+	puts "Not printing until equal to Michael Scott"
 	quit = false
 	index = 0
 	while quit != true
-		if data.keys[index] == "Rick"
+		if data.keys[index] == "Michael Scott"
 			quit = true
 		else
-			puts data.keys[index]
+			if index == data.length
+				quit = true
+			else
+				index += 1
+			end
 		end
 	end
+
+	while index < data.length 
+		puts data.keys[index]
+		index += 1
+	end
 end
+
 
 users = {
 	"Ashley" => 1000,
 	"Mhar" => 67,
 	"Rick" => 1000000,
-	"Ryan" => 6489764
+	"Ryan" => 6489764,
+	"Michael Scott" => 30000000
 }
 
 words = ['Red', 'Blue', 'Green', 'Black', 'Orange']
 
+p words
+p users
+puts "--------------------------------------------------"
+deleteArray(words)
+p words
+p users
+puts "--------------------------------------------------"
+deleteHash(users)
+p words
+p users
+puts "--------------------------------------------------"
+filterIfArray(words)
+p words
+p users
+puts "--------------------------------------------------"
+filterIfHash(users)
+p words
+p users
+puts "--------------------------------------------------"
+difFilterIfHash(users)
+p words
+p users
+puts "--------------------------------------------------"
+words = difFilterIfArray(words)
+p words
+p users
+puts "--------------------------------------------------"
 
-#users = delete(users)
-deleted_words = deletear(words)
-p "The deleted array is: "
-p deleted_words
+puts "Resetting array and hash"
 words = ['Red', 'Blue', 'Green', 'Black', 'Orange']
-printArrayIf(words)
-printHashIf(users)
-printIfNameFound(users)
-printIfColorFound(words)
+
+p words
+p users
+puts "--------------------------------------------------"
 deleteUntilArray(words)
+p words
+p users
+puts "--------------------------------------------------"
+deleteUntilHash(users)
+p words
+p users
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=begin
-streetnames = ['Michigan', 'Wabash', 'State', 'Halsted', 'Van Buren']
-
-neighborhoods = {
-	"Rodgers Park" => 'North',
-	"Lake Michigan" => 'East',
-	"Bridgeport" => 'South',
-	"Humboldt Park" => 'West'
-}
-
-streetnames.each do |street|
-	puts street
-end
-
-streetnames.map! do |street|
-	street.upcase!
-	puts street
-end
-
-neighborhoods.each do |neighborhood, direction| puts "#{neighborhood} is #{direction}" 	
-end
-
-=end
+puts "--------------------------------------------------"
