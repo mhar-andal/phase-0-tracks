@@ -151,4 +151,4 @@ while quit != true
 	index += 1
 end
 
-p user_db
+user_db.each {|key, array| print "Secret Agents: #{array}"}
