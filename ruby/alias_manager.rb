@@ -135,6 +135,7 @@ puts "Welcome to the Alias Name Generator!"
 quit = false
 index = 0
 while quit != true
+	puts "------------------------------------------------------------"
 	puts "Enter First and Last name!('quit' to exit): "
 	fullname = gets.chomp
 	if fullname.downcase == "quit"
