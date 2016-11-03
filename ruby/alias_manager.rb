@@ -2,15 +2,18 @@
 	
 PSUEDOCODE
 -Take user input for first and last name
--call method and pass first and last name in parameters
--run a condition to check for uppercase, if uppercase, downcase and set back to uppercase when done
- --user hash to store value of uppercase
+-run method to check for space to see if name is valid
+-call method and pass fullname
+	- Inside this method, split the first and last name into seperate arrays, then pass those arrays in the nextvowel and nextconson 
 -run a condition to check for vowels, if vowel found increment to next vowel. 
--run a condition to check if next consonants is a vowel, if vowel, skip vowel and choose next consonant
+	- Inside this method, check for uppercase, if uppercase found, increment to next vowel but uppercased
+-run a condition to check for consonants, if consonant found increment to next consonant
+	- Inside this method, check for uppercase, if uppercase found, increment to next vowel but uppercased
+-store name
+-print name
+-print hash that returns all users
 
-	
 =end
-
 def nextvowel(char) #RETURN VOWEL IF VOWEL FOUND
 	vowel = ['a', 'e', 'i', 'o', 'u']
 	index = 0
@@ -24,7 +27,7 @@ def nextvowel(char) #RETURN VOWEL IF VOWEL FOUND
 			end
 		end
 		 
-		if char.downcase == vowel[index]
+		if char.downcase == vowel[index] #CHECKS FOR UPPERCASE
 			if char == "U"
 				char = "A"
 			else
@@ -33,8 +36,6 @@ def nextvowel(char) #RETURN VOWEL IF VOWEL FOUND
 				index = 10
 			end
 		end
-
-
 		index += 1
 	end
 
@@ -55,7 +56,7 @@ def nextconson(char) #RETURN CONSON IF CONSON FOUND
 			end
 		end
 
-		if char.downcase == conson[index]
+		if char.downcase == conson[index] #CHECKS FOR UPPERCASE
 			if char == "Z"
 				char = "B"
 			else
@@ -64,15 +65,26 @@ def nextconson(char) #RETURN CONSON IF CONSON FOUND
 				index = 50
 			end
 		end
-
 		index += 1
 	end
 
 	return char
 end
 
-#SWAPPING NAME ALGORITHM WITH ITERATIONS
-def generateAlias(fullname)
+def checkValidName(fullname) #CHECK IF NAME IS VALID
+	valid = false
+	index = 0
+	while index < fullname.length
+		if fullname[index] == " "
+			valid = true
+		end
+		index += 1
+	end
+
+	return valid
+end
+
+def generateAlias(fullname)#SWAPPING NAME ALGORITHM WITH ITERATIONS
 	index = 0
 	fname = []
 	lname = []
@@ -94,52 +106,48 @@ def generateAlias(fullname)
 		index += 1
 	end
 
+	#BOTH WHILE LOOPS RUN NEXTVOWEL AND NEXTCONSON FOR FNAME AND LNAME
 	index = 0
-
 	while index < fname.length
 		fname[index] = nextvowel(fname[index])
+		fname[index] = nextconson(fname[index])
 		index +=1
-		p fname
 	end
 
 	index = 0
 	while index < lname.length
 		lname[index] = nextvowel(lname[index])
+		lname[index] = nextconson(lname[index]) 
 		index += 1
-		p lname
 	end
 
-	index = 0
-	while index < fname.length
-		fname[index] = nextconson(fname[index])
-		index +=1 
-	end
-
-	index = 0
-	while index < lname.length
-		lname[index] = nextconson(lname[index])
-		index +=1 
-	end
-
-	return (lname.join('') + " " + fname.join(''))
+	return (lname.join('') + " " + fname.join('')) #RETURN FULLNAME
 
 end
 
+#INITILZIE ALIAS NAME HASH
 user_db = {
 	"alias_name" => []
 }
 
+#MENU
 puts "Welcome to the Alias Name Generator!"
-
-
 quit = false
+index = 0
 while quit != true
 	puts "Enter First and Last name!('quit' to exit): "
 	fullname = gets.chomp
 	if fullname.downcase == "quit"
 		quit = true
+	elsif checkValidName(fullname) == false
+		puts "Please enter valid name!"
+		index -= 1
 	else
 		user_db["alias_name"].push(generateAlias(fullname))
-		p user_db
+		aliasname = user_db["alias_name"][index]
+		p "#{fullname} is also known as #{aliasname}" 
 	end
+	index += 1
 end
+
+p user_db
