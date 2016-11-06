@@ -50,7 +50,6 @@ class Santa
 
 end
 
-
 example_genders = ["agender", "female", "bigender", "male", "female", "gender fluid", "N/A"]
 example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", "Mystical Creature (unicorn)", "N/A"]
 
@@ -59,9 +58,6 @@ age = (0..140).to_a
 1000.times do
 	Santa.new(example_genders.sample, example_ethnicities.sample, age.sample).print
 end
-
-
-
 
 =begin
 santas = []
@@ -78,8 +74,6 @@ santas[0].gender = "Female"
 santas[0].celebrate_birthday
 santas[0].age
 santas[0].ethnicity 
-
-
 
 puts "-----------------PRINTING SANTA----------------------"
 p santas[0]
