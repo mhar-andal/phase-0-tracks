@@ -51,7 +51,6 @@ class WordGame
 		return @game_over #RETURN FOR RSPEC TEST
 	end
 
-
 	def printSecretWord
 		@secret_word.each{|x| print "#{x} "}
 		puts
