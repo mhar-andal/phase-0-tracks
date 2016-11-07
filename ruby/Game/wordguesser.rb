@@ -43,3 +43,21 @@ class WordGame
 end
 
 
+puts "Player 1 please enter your secret word!(DON'T LOOK PLAYER 2)"
+secretword = gets.chomp
+
+100.times do 
+	puts "-------------------------------HIDING ANSWER--------------------------------------"
+end
+
+game = WordGame.new(secretword)
+
+while !game.game_over
+	game.printSecretWord
+	puts "Player 2 enter your guess: "
+	char = gets.chomp
+	game.guess(char)
+	game.checkGuess
+	game.checkGameOver
+end
+
