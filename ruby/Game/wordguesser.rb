@@ -14,7 +14,10 @@ class WordGame
 		if @word.include?(char)
 			index = 0
 			@split_word.length.times do 
-				if @split_word[index] == char
+				if @secret_word[index] == char
+					puts "You already guess #{char}!"
+					@guess_count -= 1
+				elsif @split_word[index] == char
 					@secret_word[index] = char
 				end		
 			index += 1
@@ -22,6 +25,8 @@ class WordGame
 		end
 
 		@guess_count += 1
+
+		return @secret_word.join('') #RETURN FOR RSPEC TEST
 	end
 
 	def checkGuess
@@ -40,8 +45,10 @@ class WordGame
 			puts "Man you lost, looks like you are a sore loser FOREVER HAHAHAHAHA"
 
 		else
-			false
+			@game_over = false
 		end
+
+		return @game_over #RETURN FOR RSPEC TEST
 	end
 
 
@@ -51,6 +58,7 @@ class WordGame
 	end
 end
 
+#DRIVER CODE
 puts "Player 1 please enter your secret word!(DON'T LOOK PLAYER 2)"
 secretword = gets.chomp
 
