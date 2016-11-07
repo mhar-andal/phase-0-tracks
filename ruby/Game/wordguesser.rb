@@ -1,3 +1,18 @@
+=begin
+	---------CODE DESIGN---------
+- Initilize class with 4 methods
+	- First method will initialize the values.
+		-Sets up variables with the word, word but split up, and secret word that is word with every letter replaced with _
+	- Second method will check if guess is correct
+		-If they secret word contains the guess, dont count the guess
+	- Third method will check guess. 
+		-If word is equal to secret word then player won and congratulate
+		-If word is not equal and guess count is equal to word length, then player lost. Send them loser taunt
+	- Fourth method will print each secret word character with a space following
+- Write driver code to ask player 1 for a word, then ask player 2 to start guessing. Will run until game over is true
+
+=end
+
 class WordGame
 	attr_reader :word, :secret_word, :game_over
 
