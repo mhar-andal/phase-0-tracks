@@ -3,8 +3,9 @@ class WordGame
 
 	def initialize(word)
 		@word = word
-		@split_word = word.split('')
-		@secret_word = word.split('').each {|x| x = '_' }
+		@split_word = @word.split('')
+		@secret_word = @word.split('')
+		@secret_word.map!{|x| x = '_' }
 		@guess_count = 0
 		@game_over = false
 	end
@@ -24,24 +25,31 @@ class WordGame
 	end
 
 	def checkGuess
-		if @guess_count == @split_word.length
+		puts "Guess Count: #{@guess_count}"
+
+		if @word == @secret_word.join('')
 			@game_over = true
+			puts "--------------------------------------------------------------------------------------------"
+			print "Secret word is: "
+			print @secret_word.join('')
+			puts
+			puts "Congrats you won!!!!!!"
+
+		elsif @guess_count == @split_word.length
+			@game_over = true
+			puts "Man you lost, looks like you are a sore loser FOREVER HAHAHAHAHA"
+
 		else
 			false
 		end
 	end
 
-	def checkGameOver
-		if @word == @secret_word.join('')
-			@game_over = true
-		end
-	end
 
 	def printSecretWord
-		@secret_word.each {|x| print x}
+		@secret_word.each{|x| print "#{x} "}
+		puts
 	end
 end
-
 
 puts "Player 1 please enter your secret word!(DON'T LOOK PLAYER 2)"
 secretword = gets.chomp
@@ -53,11 +61,10 @@ end
 game = WordGame.new(secretword)
 
 while !game.game_over
+	puts "--------------------------------------------------------------------------------------------"
 	game.printSecretWord
 	puts "Player 2 enter your guess: "
 	char = gets.chomp
 	game.guess(char)
 	game.checkGuess
-	game.checkGameOver
 end
-
