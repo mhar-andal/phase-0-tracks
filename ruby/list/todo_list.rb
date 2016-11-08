@@ -23,5 +23,4 @@ class TodoList
 		todo_list
 	end
 
-	
 end
