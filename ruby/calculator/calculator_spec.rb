@@ -14,7 +14,7 @@ describe Calculator do
   let(:calculator) { Calculator.new }
 
   it "adds two integers" do
-    expect(calculator.add(3,4)).to eq 6
+    expect(calculator.add(3,4)).to eq 7
   end
 
   it "subtracts two integers" do
