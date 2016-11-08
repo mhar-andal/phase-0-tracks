@@ -39,9 +39,9 @@ class Santa
   # def age
   #   @age
   # end
-  # def ethnicity
-  #   @ethnicity
-  # end
+	  # def ethnicity
+	  #   @ethnicity
+	  # end
 
 # Setter Methods
   # def gender=(gender)
