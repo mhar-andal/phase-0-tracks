@@ -1,3 +1,5 @@
 .DS_Store
 ruby/sorttest.rb
 ruby/calculator/calculator_spec.rb
+ruby/santa.rb
+ruby/problem_solving_methods.rb
