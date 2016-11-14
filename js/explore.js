@@ -13,4 +13,13 @@ function reverse(string) {
 	return str
 }
 
-console.log(reverse("hello"));
+reversed_word = reverse("hello");
+
+if (2 == 2) {
+	console.log(reversed_word);
+}
+
+if (2 == 3) {
+	console.log("This won't actually run");
+}
+
