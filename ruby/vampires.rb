@@ -56,8 +56,8 @@ puts "Would you like to enroll in the company's health insurance?(yes or no)"#
 		else
 		  puts "Please enter valid input(yes or no)"
 		end
-
 	end
+
 
 # CHECK AGE
 age_valid = age_validator(age, year, current_year)
