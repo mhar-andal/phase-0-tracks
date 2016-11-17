@@ -61,6 +61,7 @@ function genRandomData(length) {
 		var word = "";	
 		for(var j = randomLength(); j < 10; j++) {
 			word += possible.charAt(randomLetter());
+			
 		}
 		words[i] = word;
 	}
