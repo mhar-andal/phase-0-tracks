@@ -1,3 +1,30 @@
+// Psuedocode
+// find longest word
+// INPUT: Array
+// STEPS: assign first element to a variable
+// run forloop to iterate array, run condition to check element lengths, finds biggest
+// OUTPUT: longest word
+
+// Match Key Value
+// INPUT: 2 objects
+// STEPS: run conditions to check if there variabls are equal
+// OUTPUT: retun true or false
+
+// Generate random words
+// INPUT: length
+// STEPS: run for loop, assign a random length word, add length words
+// OUTPUT: return the array of words
+
+// random number for letters
+// INPUT: none
+// STEPS: calculate random number
+// OUTPUT: number
+
+// randomo number for length
+// INPUT: none
+// STEPS: calculate random number for length
+// OUTPUT: number
+
 function find_long(arr) {
 longest_word = arr[0];
 
