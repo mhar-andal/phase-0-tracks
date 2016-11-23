@@ -1,0 +1,38 @@
+sqlite> SELECT * FROM teachers;
+1|Ms. Greenly|230
+2|Mrs. Ebervien|232
+
+sqlite> UPDATE students SET teacher_id = 1 WHERE students.id = 2;
+
+sqlite> SELECT * FROM students JOIN teachers ON students.teacher_id = teachers.id WHERE students.teacher_id = teachers.id;
+1|Mhar Andal|8|1|99.34|1|Ms. Greenly|230
+2|Cindy Lou Who|8|1|100|1|Ms. Greenly|230
+3|Fred Meanie|9|2|53.24|2|Mrs. Ebervien|232
+4|Brad Richsworth|9|2|100|2|Mrs. Ebervien|232
+5|Lindsay Puffle|8|1|93.45|1|Ms. Greenly|230
+sqlite>
+
+sqlite> SELECT students.full_name, students.age, teachers.teacher_name, students.grade FROM students JOIN teachers ON students.teacher_id = teachers.id where students.teacher_id = teachers.id;
+Mhar Andal|8|Ms. Greenly|99.34
+Cindy Lou Who|8|Ms. Greenly|100
+Fred Meanie|9|Mrs. Ebervien|53.24
+Brad Richsworth|9|Mrs. Ebervien|100
+Lindsay Puffle|8|Ms. Greenly|93.45
+
+sqlite> DELETE FROM students WHERE full_name = "Fred Meanie";
+sqlite> select * from students
+   ...> ;
+1|Mhar Andal|8|1|99.34
+2|Cindy Lou Who|8|1|100
+4|Brad Richsworth|9|2|100
+5|Lindsay Puffle|8|1|93.45
+
+sqlite> SELECT students.full_name, teachers.teacher_name FROM students INNER JOIN teachers ON students.teacher_id = teachers.id;
+Mhar Andal|Ms. Greenly
+Cindy Lou Who|Ms. Greenly
+Brad Richsworth|Mrs. Ebervien
+Lindsay Puffle|Ms. Greenly
+sqlite>
+
+sqlite> SELECT students.full_name, teachers.teacher_name FROM students RIGHT JOIN teachers ON students.teacher_id = teachers.id;
+Error: RIGHT and FULL OUTER JOINs are not currently supported
