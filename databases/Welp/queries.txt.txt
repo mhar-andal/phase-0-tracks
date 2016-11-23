@@ -1,0 +1,16 @@
+QUESTION 3:
+
+sqlite> SELECT first_name, last_name, name, stars, comment FROM users JOIN reviews 
+ON users.id = reviews.user_id JOIN businesses ON reviews.business_id = businesses.id;
+Bradford|Pitt|Grundy Hollow Wedding Chapel|5|Very good!
+sqlite>
+
+--------------------------------------------------------------------------------------------------------
+
+QUESTION 4:
+
+sqlite> select first_name, last_name, stars, comment, name from users join reviews 
+ON users.id = reviews.user_id JOIN businesses ON reviews.business_id = businesses.id WHERE businesses.id = 1;
+Steven|Wonder|2|Great CHURCH!|Grundy Hollow Wedding Chapel
+Bradford|Pitt|5|Very good!|Grundy Hollow Wedding Chapel
+sqlite>
