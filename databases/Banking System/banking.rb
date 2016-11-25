@@ -1,13 +1,3 @@
-=begin
-update account now working, withdraw and deposit workng.
-
-need to add change password, close account and access with full name and password
-
-
-	
-=end
-
-
 require 'sqlite3'
 require 'faker'
 
@@ -23,11 +13,11 @@ $create_table_cmd = <<-SQL
   )
 SQL
 
-
 bank_db.execute($create_table_cmd)
 
 class BankingAccount
-	attr_accessor :fullname, :pin, :balance, :accountNumber
+	attr_reader :fullname, :accountNumber
+	attr_accessor :pin, :balance
 
 	def initialize(args)
 		@fullname = args[:fullname]
@@ -60,7 +50,6 @@ class BankingAccount
 			puts "Account not deleted, exiting"
 		end
 	end
-	
 
 	def change_pin
 		puts "Please enter your current pin: "
@@ -82,7 +71,6 @@ class BankingAccount
 			return true
 		end
 	end
-				
 
 	private
 
@@ -118,7 +106,7 @@ class BankingAccount
 	end
 end
 
-#OUTSIDE CLASS
+#METHODS OUTSIDE CLASS
 
 def new_account(bank_db)
 	puts "We are glad you're starting a banking account with us!"
@@ -135,7 +123,7 @@ end
 def find_by_account_number(bank_db)
 	account_found = false
 	while account_found == false
-		puts "Enter your account number(type 'exit' to exit:) "
+		puts "Enter your account number(type 'exit' to exit): "
 		account_number = gets.chomp
 		if account_number == "exit"
 			account_found = true
@@ -148,6 +136,27 @@ def find_by_account_number(bank_db)
 				puts "Account Found!"
 				account_found = true
 				return account_information
+			end
+		end
+	end
+end
+
+def find_by_name(bank_db)
+	account_found = false
+	while account_found == false
+		puts "Enter your full name(please be case sensitive)(type 'exit' to exit): "
+		full_name = gets.chomp
+		if full_name == "exit"
+			account_found = true
+			return "exit"
+		else
+			account_information = bank_db.execute("SELECT * FROM accounts WHERE name = '#{full_name}'")
+			if account_information.empty? || account_information == nil
+				puts "Account not found with number #{full_name}"		
+			else
+				puts "Account Found!"
+				account_found = true
+				return account_information	
 			end
 		end
 	end
@@ -197,6 +206,7 @@ def access_account(account, bank_db)
 				account = nil
 				break
 			when 0
+				puts "Logging off"
 				break
 			else
 				puts "Please enter valid input!"
@@ -215,7 +225,6 @@ def pin_valid(account_info)
 		return false
 	end
 end
-
 
 #DRIVER CODE
 puts "Welcome to the Bank of Ruby!"
@@ -239,12 +248,18 @@ loop do
 				end
 			end
 		when 3
+			account_info = find_by_name(bank_db)
+			if account_info == "exit"
+				puts "Exiting"
+			else
+				if pin_valid(account_info) == true
+					open_account(account_info, bank_db)
+				end
+			end
 
 		when 0
 			break
 		else
 			puts "Please enter valid input!"
-		
-	end
-	
+	end	
 end
