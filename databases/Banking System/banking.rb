@@ -1,3 +1,4 @@
+#CODE REVIEW TAG
 require 'sqlite3'
 require 'faker'
 
