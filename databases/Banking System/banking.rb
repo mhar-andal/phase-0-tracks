@@ -1,3 +1,13 @@
+=begin
+update account now working, withdraw and deposit workng.
+
+need to add change password, close account and access with full name and password
+
+
+	
+=end
+
+
 require 'sqlite3'
 require 'faker'
 
@@ -8,7 +18,7 @@ $create_table_cmd = <<-SQL
   CREATE TABLE IF NOT EXISTS accounts(
     acct_num INT,
     name VARCHAR(255),
-    password VARCHAR(255),
+    pin VARCHAR(255),
     balance DECIMAL
   )
 SQL
@@ -17,51 +27,93 @@ SQL
 bank_db.execute($create_table_cmd)
 
 class BankingAccount
-	attr_accessor :fullname, :password, :balance, :accountNumber
+	attr_accessor :fullname, :pin, :balance, :accountNumber
 
 	def initialize(args)
 		@fullname = args[:fullname]
-		@password = args[:password] || newpassword
-		@balance = args[:balance] || 100
+		@pin = args[:pin] || newpin
+		@balance = args[:balance] || 100.00
 		@accountNumber = args[:acct_num] || genAccountNumber
+	end
+
+	def printInfo
+		puts "~~~~~~~~~~~~~~Bank of Ruby~~~~~~~~~~~~~~"
+		puts "#{@fullname}"
+		puts "Balance: $#{sprintf("%.2f", @balance)}"
+		puts "Account Number: #{@accountNumber}"
+	end
+
+	def create_account(bank_db)
+ 		bank_db.execute("INSERT INTO accounts (acct_num, name, pin, balance) VALUES (?, ?, ?, ?)", [@accountNumber, @fullname, @pin, @balance])
+	end
+
+	def update_account(bank_db)
+		bank_db.execute("UPDATE accounts SET acct_num = '#{@accountNumber}', name = '#{@fullname}', pin = '#{@pin}', balance = '#{@balance}' WHERE acct_num = '#{@accountNumber}'")
+	end
+
+	def delete_confirm(bank_db)
+		puts "Type 'yes i want to delete my account' if you want to delete your banking account: "
+		delete_response = gets.chomp
+		if delete_response == "yes i want to delete my account"
+			delete_account(bank_db)
+		else
+			puts "Account not deleted, exiting"
+		end
+	end
+	
+
+	def change_pin
+		puts "Please enter your current pin: "
+		pin_input = gets.chomp
+
+		if pin_input == @pin
+			@pin = newpin
+			puts "You have successfully changed your pin!"
+		else
+			puts "Your pin is incorrect, please try again."
+		end
+	end
+
+	def check_pin_length(pin)
+		if pin.length <= 3 || pin.length >= 5
+			puts "Error, invalid pin (Must be 4 digits)"
+			return false
+		else
+			return true
+		end
+	end
+				
+
+	private
+
+	def delete_account(bank_db)
+		bank_db.execute("DELETE FROM accounts WHERE acct_num = #{@accountNumber};")
+		puts "Account successfully deleted!"
 	end
 
 	def genAccountNumber
 		accNum = '%010d' % rand(10 ** 10)
 	end
 
-	def printInfo
-		puts "~~~~~~~~~~~~~~Bank of Ruby~~~~~~~~~~~~~~"
-		puts "#{@fullname}"
-		puts "Balance: $#{@balance}"
-		puts "Account Number: #{@accountNumber}"
-	end
-
-	def create_account(bank_db)
- 		bank_db.execute("INSERT INTO accounts (acct_num, name, password, balance) VALUES (?, ?, ?, ?)", [@accountNumber, @fullname, @password, @balance])
-	end
-
-	def update_account(bank_db)
-		bank_db.execute("UPDATE accounts SET acct_num = '#{@accountNumber}', name = '#{@fullname}', password = '#{@password}', balance = '#{@balance}' WHERE acct_num = '#{@accountNumber}'")
-	end
-
-	private
-
-	def newpassword
+	def newpin
 		confirmed = false
 		while confirmed == false
-			p "Enter Password: "
-			confirm_password = gets.chomp
-			p "Confirm your password: "
-			confirm_password_valid = gets.chomp
-			confirm_password == confirm_password_valid ? confirmed = true :  password_msg
+			p "Please enter a new pin(Must be 4 digits): "
+			confirm_pin = gets.chomp
+			if check_pin_length(confirm_pin) == false
+				confirmed = false
+			else
+				p "Confirm your pin: "
+				confirm_pin_valid = gets.chomp
+				confirm_pin == confirm_pin_valid ? confirmed = true :  pin_msg
+			end
 		end
-		return confirm_password
+		return confirm_pin
 	end
 
-	def password_msg
+	def pin_msg
 		puts
-		puts "Passwords do not match!"
+		puts "Pins do not match!"
 		puts
 	end
 end
@@ -77,6 +129,7 @@ def new_account(bank_db)
 	account = BankingAccount.new({fullname: fullname})
 	account.printInfo
 	account.create_account(bank_db)
+	return account
 end
 
 def find_by_account_number(bank_db)
@@ -90,7 +143,7 @@ def find_by_account_number(bank_db)
 		else 
 			account_information = bank_db.execute("SELECT * FROM accounts WHERE acct_num = #{account_number.to_i}")
 			if account_information.empty? || account_information == nil
-				puts "Account not found with number #{account_number}"	
+				puts "Account not found with number #{account_number}"
 			else
 				puts "Account Found!"
 				account_found = true
@@ -101,33 +154,33 @@ def find_by_account_number(bank_db)
 end
 
 def open_account(account_info, bank_db)
-	account = BankingAccount.new({fullname: account_info[0]['name'], password: account_info[0]['password'], balance: account_info[0]['balance'], acct_num: account_info[0]['acct_num'] })
-	access_account(account)
-	account.update_account(bank_db)
+	account = BankingAccount.new({fullname: account_info[0]['name'], pin: account_info[0]['pin'], balance: account_info[0]['balance'], acct_num: account_info[0]['acct_num'] })
+	access_account(account, bank_db)
 end
 
-def access_account(account)
+def access_account(account, bank_db)
 	puts "----------------------------------------------------------"
 	puts "Welcome #{account.fullname}!"
 	loop do
 		puts "~~~~Menu~~~~"
 		puts "1. Make a deposit"
 		puts "2. Make a withdrawl"
-		puts "3. Change password"
-		puts "4. Close account"
-		puts "5. Exit"
+		puts "3. Print Account Information"
+		puts "4. Change Pin number"
+		puts "5. Close account"
+		puts "0. Exit"
 		access_choice = gets.chomp.to_i
 
 		case access_choice
 			when 1
 				puts "How much would you like to deposit?"
-				deposit_amt = gets.chomp.to_i
+				deposit_amt = gets.chomp.to_f
 				account.balance += deposit_amt
 				puts "You deposited $#{sprintf("%.2f", deposit_amt)}"
 				puts "Your new balance is $#{sprintf("%.2f", account.balance)}"
 			when 2
 				puts "How much would you like to withdraw?"
-				withdraw_amt = gets.chomp.to_i
+				withdraw_amt = gets.chomp.to_f
 				if withdraw_amt > account.balance
 					puts "Insufficient funds, unable to withdraw $#{sprintf("%.2f", withdraw_amt)}" 
 				else
@@ -136,14 +189,30 @@ def access_account(account)
 					puts "Your new balance is $#{sprintf("%.2f", account.balance)}"
 				end
 			when 3
-
+				account.printInfo
 			when 4
-
+				account.change_pin
 			when 5
+				account.delete_confirm(bank_db)
+				account = nil
+				break
+			when 0
 				break
 			else
 				puts "Please enter valid input!"
 			end
+		end
+		account == nil ? return : account.update_account(bank_db)
+end
+
+def pin_valid(account_info)
+	puts "Please enter your pin: "
+	valid_pin_check = gets.chomp
+	if account_info[0]['pin'] == valid_pin_check
+		return true
+	else
+		puts "Access denied, pin is incorrect"
+		return false
 	end
 end
 
@@ -153,22 +222,25 @@ puts "Welcome to the Bank of Ruby!"
 loop do 
 	puts "---------------------------MENU---------------------------"
 	puts "1. Fill out new Banking Application"
-	puts "2. Access account with account number"
-	puts "3. Access account with full name and password"
-	puts "4. Quit"
+	puts "2. Access account with account number and pin"
+	puts "3. Access account with full name and pin"
+	puts "0. Quit"
 	choice = gets.chomp.to_i
 	case choice 
 		when 1
-			new_account(bank_db)
+			access_account(new_account(bank_db), bank_db)
 		when 2
 			account_info = find_by_account_number(bank_db) 
 			if account_info == "exit"
+				puts "Exiting"
 			else
-				open_account(account_info, bank_db)
+				if pin_valid(account_info) == true
+					open_account(account_info, bank_db)
+				end
 			end
 		when 3
 
-		when 4
+		when 0
 			break
 		else
 			puts "Please enter valid input!"
