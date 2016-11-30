@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>People</title>
+  </head>
+  <body>
+    <a href="/people/new">Click here to add a new person to the table</a>
+
+
+    <ul>
+    <% @people.each do |person| %>
+    <li><%= person['name'] %>, <%= person['age'] %>, <%= person['gender'] %></li>
+      <% end %>
+  </ul>
+  </body>
+</html>
