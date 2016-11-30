@@ -60,3 +60,8 @@ get '/add' do
   result = num1.to_i + num2.to_i
   "#{num1} + #{num2} is #{result.to_s}"
 end
+
+get '/search/:campus' do
+  student = db.execute("SELECT * FROM students WHERE campus=?", [params[:campus]])
+  "#{student}"
+end
